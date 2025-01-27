@@ -134,25 +134,25 @@ class OrdersAPI:
             # 5345 Дата доставки - 157222 ожидает в пвз
             # 4827 Дата завершения - 157158 доставлен
 
-            status_to_field = {
-                157223: 5283,
-                157222: 5345,
-                157158: 4827
-            }
+            # status_to_field = {
+            #     157223: 5283,
+            #     157222: 5345,
+            #     157158: 4827
+            # }
 
             today = date.today()
 
-            formatted_date = today.strftime("%Y-%m-%d")
-            if crm_status == 157223:
-                formatted_date = today.strftime("%Y-%m-%d %H:%M")
+            # formatted_date = today.strftime("%Y-%m-%d")
+            # if crm_status == 157223:
+            #     formatted_date = today.strftime("%Y-%m-%d %H:%M")
 
-            if crm_status in status_to_field:
-                data.append({
-                    "customFieldValue": {
-                        "fieldId": status_to_field[crm_status],
-                        "value": formatted_date
-                    }
-                })
+            # if crm_status in status_to_field:
+            #     data.append({
+            #         "customFieldValue": {
+            #             "fieldId": status_to_field[crm_status],
+            #             "value": formatted_date
+            #         }
+            #     })
 
             try:
                 response = self.request_api.send(
