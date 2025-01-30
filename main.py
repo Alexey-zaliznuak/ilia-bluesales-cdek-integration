@@ -98,6 +98,7 @@ def main(*args, **kwargs):
             and o.status_name not in [
                 "Возврат",
                 "Доставлен",
+                "Вручен",
             ],
         bluesales_orders
         )
