@@ -3,6 +3,8 @@ from datetime import datetime, timedelta, date
 from time import sleep
 from typing import List
 
+from settings import Settings
+
 from progress.bar import Bar as Bar
 
 from .exceptions import TooLargeBoarders
@@ -130,29 +132,17 @@ class OrdersAPI:
                 },
             }
 
-            # 5283 Дата отправки - 157223 отправлен +
-            # 5345 Дата доставки - 157222 ожидает в пвз
-            # 4827 Дата завершения - 157158 доставлен
-
-            # status_to_field = {
-            #     157223: 5283,
-            #     157222: 5345,
-            #     157158: 4827
-            # }
-
             today = date.today()
 
-            # formatted_date = today.strftime("%Y-%m-%d")
-            # if crm_status == 157223:
-            #     formatted_date = today.strftime("%Y-%m-%d %H:%M")
+            formatted_date = today.strftime("%Y-%m-%d")
 
-            # if crm_status in status_to_field:
-            #     data.append({
-            #         "customFieldValue": {
-            #             "fieldId": status_to_field[crm_status],
-            #             "value": formatted_date
-            #         }
-            #     })
+            if crm_status in Settings.STATUS_TO_DATE_FIELD:
+                data.append({
+                    "customFieldValue": {
+                        "fieldId": Settings.STATUS_TO_DATE_FIELD[crm_status],
+                        "value": formatted_date
+                    }
+                })
 
             try:
                 response = self.request_api.send(
