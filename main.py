@@ -1,4 +1,4 @@
-# !/home/admin/update-statuses-by-transfering/venv/bin/python
+# !/root/bluesales-cdek-transfering-integration/venv/bin/python
 import os
 import vk_api
 
@@ -18,6 +18,7 @@ from logging import StreamHandler
 from settings import Settings
 from external.bluesales.ordersapi import Order
 
+exit()
 
 logger = logging.getLogger("root")
 logger.setLevel(logging.DEBUG)
