@@ -21,6 +21,12 @@ class Order:
         self.status_name = order.get("orderStatus", {}).get("name", None)
         self.status_id = order.get("orderStatus", {}).get("id", None)
 
+        self.customer = order.get("customer", {})
+        self.customer_id = order.get("customer", {}).get("id", None)
+        self.customer_vk = self.customer.get("vk", {}) if self.customer else None
+        self.customer_vk_id = self.customer_vk.get("id", {}) if self.customer_vk else None
+        self.customer_vk_messages_group_id = self.customer_vk.get("messagesGroupId", {}) if self.customer_vk else None
+
         self.tracking_number = None
         for custom_field in order.get('customFields', []):
             if custom_field.get('fieldId', None) == 5882:  # айди кастомного поля - айди для сдека
