@@ -1,4 +1,5 @@
 # !/root/bluesales-cdek-transfering-integration/venv/bin/python
+import json
 import os
 import vk_api
 
@@ -22,17 +23,17 @@ from external.bluesales.ordersapi import Order
 logger = logging.getLogger("root")
 logger.setLevel(logging.INFO)
 
-file_handler = RotatingFileHandler("/root/bluesales-cdek-transfering-integration/log.log", maxBytes=64*1024, backupCount=3, encoding='utf-8')
-formatter = logging.Formatter('%(message)s')
-file_handler.setFormatter(formatter)
-file_handler.setLevel(logging.INFO)
+# file_handler = RotatingFileHandler("/root/bluesales-cdek-transfering-integration/log.log", maxBytes=64*1024, backupCount=3, encoding='utf-8')
+# formatter = logging.Formatter('%(message)s')
+# file_handler.setFormatter(formatter)
+# file_handler.setLevel(logging.INFO)
 
-full_file_handler = RotatingFileHandler("/root/bluesales-cdek-transfering-integration/full_log.log", maxBytes=256*1024, backupCount=3, encoding='utf-8')
-full_file_handler.setFormatter(formatter)
-full_file_handler.setLevel(logging.DEBUG)
+# full_file_handler = RotatingFileHandler("/root/bluesales-cdek-transfering-integration/full_log.log", maxBytes=256*1024, backupCount=3, encoding='utf-8')
+# full_file_handler.setFormatter(formatter)
+# full_file_handler.setLevel(logging.DEBUG)
 
-logger.addHandler(file_handler)
-logger.addHandler(full_file_handler)
+# logger.addHandler(file_handler)
+# logger.addHandler(full_file_handler)
 
 stream_handler = StreamHandler()
 stream_formatter = logging.Formatter("%(message)s")
@@ -145,3 +146,11 @@ if __name__ == "__main__":
         logger.error(e)
     finally:
         logger.info("\n"*2)
+
+
+# orders = BLUESALES.orders.get_all(ids=[10746779])
+
+# with open("./temp_order.json", 'w', encoding='utf-8') as f:
+#     json.dump(orders[0].order, f, ensure_ascii=False, indent=4)
+
+# exit()

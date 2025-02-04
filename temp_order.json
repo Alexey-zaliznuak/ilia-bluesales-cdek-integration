@@ -1,0 +1,359 @@
+{
+    "id": 10746779,
+    "customer": {
+        "id": 134937454,
+        "fullName": "Вячеслав Мельник",
+        "photoUrl": "https://sun1-22.userapi.com/s/v1/ig2/FpwPnioOEvMb_DmkLhBu8Gu7lW9cZPL2NBDOBJpHwnIxup0P9L0Eh2m8pbE-aQ_WgboidsahxHceTXgngW-ZnIKT.jpg?quality=95&crop=440,650,960,960&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720&ava=1&cs=240x240",
+        "country": null,
+        "city": null,
+        "birthday": "26.06.1975",
+        "sex": "m",
+        "vk": {
+            "id": "891329379",
+            "name": "Вячеслав Мельник",
+            "messagesGroupId": "212275786"
+        },
+        "ok": null,
+        "facebook": null,
+        "instagram": null,
+        "whatsApp": null,
+        "telegram": null,
+        "avito": null,
+        "phone": "",
+        "email": "",
+        "address": "",
+        "otherContacts": "",
+        "crmStatus": {
+            "id": 236687,
+            "name": "Заказ оформлен",
+            "color": "#008000",
+            "type": 4
+        },
+        "tags": [
+            {
+                "id": 172440,
+                "name": "Сообщения сообщества",
+                "color": "#1D76DB",
+                "textColor": "White"
+            },
+            {
+                "id": 178655,
+                "name": "LOOK AT ME | Именные часы",
+                "color": "#1D76DB",
+                "textColor": "White"
+            },
+            {
+                "id": 376053,
+                "name": "нитка",
+                "color": "#1D76DB",
+                "textColor": "White"
+            },
+            {
+                "id": 396184,
+                "name": "В-500",
+                "color": "#1D76DB",
+                "textColor": "White"
+            },
+            {
+                "id": 415828,
+                "name": "шрифт циферблат",
+                "color": "#0E8A16",
+                "textColor": "White"
+            }
+        ],
+        "firstContactDate": "02.02.2025",
+        "lastContactDate": "04.02.2025",
+        "nextContactDate": "",
+        "source": null,
+        "salesChannel": {
+            "id": 145688,
+            "code": 1,
+            "name": "ВКонтакте"
+        },
+        "manager": {
+            "id": 47658,
+            "fullName": "Менеджер 15",
+            "email": "chasy.kazan@yandex.ru",
+            "login": "manager1515",
+            "phone": "",
+            "vk": null,
+            "lastLoginDate": "04.02.2025",
+            "lastActivityDate": "04.02.2025",
+            "isActive": true,
+            "permissionsSettings": {
+                "canViewCustomersWithTags": [],
+                "canViewPages": {
+                    "customersList": true,
+                    "ordersList": true,
+                    "salesReport": true,
+                    "salesBySourceReport": true,
+                    "salesByManagerReport": true,
+                    "paymentsReport": true,
+                    "goodsSalesReport": true,
+                    "goodsInStockReport": true,
+                    "goodsMotions": true,
+                    "phrases": true,
+                    "messenger": true,
+                    "bots": true,
+                    "campaigns": true,
+                    "references": true
+                },
+                "amoCrmAccessToken": null
+            }
+        },
+        "vkManager": null,
+        "okManager": null,
+        "shortNotes": "",
+        "comments": "женские",
+        "customFields": []
+    },
+    "internalNumber": 56766,
+    "externalNumber": "U4TxXPV6VkD1KWz0c2R9",
+    "date": "02.02.2025",
+    "orderStatus": {
+        "id": 125846,
+        "name": "Отправлен"
+    },
+    "goodsPositions": [
+        {
+            "id": 16651856,
+            "goods": {
+                "id": 329243,
+                "marking": "Часы - стандарт женские",
+                "name": "Часы - стандарт женские",
+                "weight": null
+            },
+            "size": "(черный)",
+            "price": 4490.0,
+            "costPerItem": 400.0,
+            "quantity": 1,
+            "customFields": [
+                {
+                    "fieldId": 792,
+                    "value": [
+                        "1701266589721"
+                    ],
+                    "valueAsText": "Анжелика"
+                }
+            ]
+        },
+        {
+            "id": 16652086,
+            "goods": {
+                "id": 330365,
+                "marking": "Браслет Белый",
+                "name": "Браслет (белый)",
+                "weight": null
+            },
+            "size": "белый",
+            "price": 0.0,
+            "costPerItem": 0.0,
+            "quantity": 1,
+            "customFields": []
+        },
+        {
+            "id": 16652085,
+            "goods": {
+                "id": 360248,
+                "marking": "Коробочка",
+                "name": "Коробочка",
+                "weight": 0.1
+            },
+            "size": "(красная)",
+            "price": 590.0,
+            "costPerItem": 0.0,
+            "quantity": 1,
+            "customFields": [
+                {
+                    "fieldId": 792,
+                    "value": [
+                        "1701266589721"
+                    ],
+                    "valueAsText": "Анжелика"
+                }
+            ]
+        },
+        {
+            "id": 16652280,
+            "goods": {
+                "id": 362791,
+                "marking": "Апсейл ПРЕМИУМ магнит (миланские)",
+                "name": "Апсейл ПРЕМИУМ магнит (миланские)",
+                "weight": null
+            },
+            "size": "Серебряный",
+            "price": 2000.0,
+            "costPerItem": 0.0,
+            "quantity": 1,
+            "customFields": [
+                {
+                    "fieldId": 792,
+                    "value": [
+                        "1709099847073"
+                    ],
+                    "valueAsText": "Настя.В"
+                },
+                {
+                    "fieldId": 874,
+                    "value": "56766_1РТ",
+                    "valueAsText": "56766_1РТ"
+                }
+            ]
+        }
+    ],
+    "totalSumWithoutDiscount": 7080.0,
+    "discount": 0.0,
+    "moneyDiscount": 0.0,
+    "totalSumMinusDiscount": 7080.0,
+    "deliveryCost": 0.0,
+    "deliveryPrice": 490.0,
+    "totalSumWithDelivery": 7570.0,
+    "prepay": 2600.0,
+    "prepayPaymentType": null,
+    "prepayDate": "02.02.2025",
+    "prepayComments": "",
+    "totalSumMinusPrepay": 4970.0,
+    "trackingNumber": "",
+    "postStatus": 0,
+    "postTrackingNumber": "",
+    "deliveryService": 5,
+    "delivery": {
+        "deliveryType": 4,
+        "deliveryTypeName": "СДЭК / Самовывоз",
+        "pvz": {
+            "code": "NSK253",
+            "name": "NSK253, Новосибирск, ул. Авиастроителей"
+        },
+        "sendDate": null,
+        "cityFrom": {
+            "cdekCityId": 424,
+            "name": "Казань",
+            "regionName": "Татарстан респ."
+        },
+        "cityTo": {
+            "cdekCityId": 270,
+            "name": "Новосибирск",
+            "regionName": "Новосибирская обл."
+        },
+        "tariff": {
+            "code": 136,
+            "name": "Посылка склад-склад"
+        },
+        "customerName": "Мельник Вячеслав Иванович",
+        "weight": 0.1,
+        "dimensions": {
+            "length": 17.0,
+            "width": 12.0,
+            "height": 9.0
+        },
+        "phone": "8 (923) 148-37-78",
+        "company": "",
+        "email": "",
+        "comments": ""
+    },
+    "customerComments": "",
+    "internalComments": "",
+    "manager": {
+        "id": 47658,
+        "fullName": "Менеджер 15",
+        "email": "chasy.kazan@yandex.ru",
+        "login": "manager1515",
+        "phone": "",
+        "vk": null,
+        "lastLoginDate": "04.02.2025",
+        "lastActivityDate": "04.02.2025",
+        "isActive": true,
+        "permissionsSettings": {
+            "canViewCustomersWithTags": [],
+            "canViewPages": {
+                "customersList": true,
+                "ordersList": true,
+                "salesReport": true,
+                "salesBySourceReport": true,
+                "salesByManagerReport": true,
+                "paymentsReport": true,
+                "goodsSalesReport": true,
+                "goodsInStockReport": true,
+                "goodsMotions": true,
+                "phrases": true,
+                "messenger": true,
+                "bots": true,
+                "campaigns": true,
+                "references": true
+            },
+            "amoCrmAccessToken": null
+        }
+    },
+    "customFields": [
+        {
+            "fieldId": 5298,
+            "value": "02.02.2025",
+            "valueAsText": "2 февраля 2025"
+        },
+        {
+            "fieldId": 5299,
+            "value": "03.02.2025",
+            "valueAsText": "3 февраля 2025"
+        },
+        {
+            "fieldId": 5291,
+            "value": "03.02.2025",
+            "valueAsText": "3 февраля 2025"
+        },
+        {
+            "fieldId": 3650,
+            "value": "4",
+            "valueAsText": "4"
+        },
+        {
+            "fieldId": 3740,
+            "value": "03.02.2025",
+            "valueAsText": "3 февраля 2025"
+        },
+        {
+            "fieldId": 3925,
+            "value": false,
+            "valueAsText": "Нет"
+        },
+        {
+            "fieldId": 3651,
+            "value": "4",
+            "valueAsText": "4"
+        },
+        {
+            "fieldId": 3649,
+            "value": "Наталья",
+            "valueAsText": "Наталья"
+        },
+        {
+            "fieldId": 3653,
+            "value": "нет",
+            "valueAsText": "нет"
+        },
+        {
+            "fieldId": 3654,
+            "value": "https://sun9-13.userapi.com/s/v1/ig2/YqM65Nn2QlXFAZSgODPfiUOnp0BmOGp5qV69N2cGMtuyWkIWJJJ7VNttbPB7Oy5_w4qLaCKhBEqefslKMMgOR6Pp.jpg?quality=96&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1024x1024&from=bu&cs=1024x1024&attachment=photo-212275786_458176978",
+            "valueAsText": "https://sun9-13.userapi.com/s/v1/ig2/YqM65Nn2QlXFAZSgODPfiUOnp0BmOGp5qV69N2cGMtuyWkIWJJJ7VNttbPB7Oy5_w4qLaCKhBEqefslKMMgOR6Pp.jpg?quality=96&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1024x1024&from=bu&cs=1024x1024&attachment=photo-212275786_458176978"
+        },
+        {
+            "fieldId": 5217,
+            "value": "04.02.2025",
+            "valueAsText": "4 февраля 2025"
+        },
+        {
+            "fieldId": 4196,
+            "value": false,
+            "valueAsText": "Нет"
+        },
+        {
+            "fieldId": 3724,
+            "value": "03.02.2025",
+            "valueAsText": "3 февраля 2025"
+        },
+        {
+            "fieldId": 5882,
+            "value": "10081122715",
+            "valueAsText": "10081122715"
+        }
+    ]
+}

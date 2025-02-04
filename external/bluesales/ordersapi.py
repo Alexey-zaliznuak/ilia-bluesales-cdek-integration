@@ -18,9 +18,14 @@ class Order:
     def __init__(self, order: dict):
         self.order = order
         self.id: int = order.get('id')
-        self.tracking_number = order.get("trackingNumber", None)
         self.status_name = order.get("orderStatus", {}).get("name", None)
         self.status_id = order.get("orderStatus", {}).get("id", None)
+
+        self.tracking_number = None
+        for custom_field in order.get('customFields', []):
+            if custom_field.get('fieldId', None) == 5882:  # айди кастомного поля - айди для сдека
+                self.tracking_number = custom_field.get("value", None)
+                break
 
 class OrdersAPI:
     def __init__(self, request_api: RequestApi):
