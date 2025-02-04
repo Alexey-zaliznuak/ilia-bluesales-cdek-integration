@@ -38,7 +38,7 @@ logger.addHandler(full_file_handler)
 stream_handler = StreamHandler()
 stream_formatter = logging.Formatter("%(message)s")
 stream_handler.setFormatter(stream_formatter)
-stream_handler.setLevel(logging.DEBUG)
+stream_handler.setLevel(logging.INFO)
 logger.addHandler(stream_handler)
 
 
