@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta, date
+import logging
 from time import sleep
 from typing import List
 
@@ -12,6 +13,8 @@ from .methods import OrdersMethods
 from .request import RequestApi
 
 MAX_COUNT_CUSTOMERS_PER_REQUEST = 500
+
+logger = logging.getLogger("root")
 
 
 class Order:
@@ -125,19 +128,25 @@ class OrdersAPI:
     ):
         grouped_data = {}
 
-        for order_id, status in data:
+        for order_id, status, customer_id in data:
             if status not in grouped_data:
-                grouped_data[status] = []
-            grouped_data[status].append(str(order_id))
+                grouped_data[status] = {"orders": [], "customers": []}
+            grouped_data[status]["orders"].append(order_id)
+            grouped_data[status]["customers"].append(customer_id)
 
         for crm_status, ids in grouped_data.items():
-            if not ids:
+            crm_status = int(crm_status)
+
+            if not ids["orders"]:
                 continue
 
-            print(f"Обновление {len(ids)} заказов до статуса '{crm_status}'.")
+            logger.info(f"Обновление {len(ids)} заказов до статуса '{crm_status}'.")
 
-            data = {
-                "ids": ids,
+            for id in ids["orders"]:
+                logger.info(f"Обновление заказа {id} до статуса {crm_status} ({Settings.INVERTED_STATUSES[str(crm_status)]}), https://bluesales.ru/app/Customers/OrderView.aspx?id={id}")
+
+            orders_data = {
+                "ids": ids["orders"],
                 "orderStatus": {
                     "id": crm_status
                 },
@@ -148,7 +157,7 @@ class OrdersAPI:
             formatted_date = today.strftime("%Y-%m-%d")
 
             if crm_status in Settings.STATUS_TO_DATE_FIELD:
-                data.append({
+                orders_data.append({
                     "customFieldValue": {
                         "fieldId": Settings.STATUS_TO_DATE_FIELD[crm_status],
                         "value": formatted_date
