@@ -4,7 +4,7 @@ import vk_api
 
 from typing import List, Tuple
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from time import sleep
 from requests.exceptions import HTTPError
 
@@ -18,17 +18,16 @@ from logging import StreamHandler
 from settings import Settings
 from external.bluesales.ordersapi import Order
 
-exit()
 
 logger = logging.getLogger("root")
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
-file_handler = RotatingFileHandler("/home/admin/update-statuses-by-transfering/log.log", maxBytes=64*1024, backupCount=3, encoding='utf-8')
+file_handler = RotatingFileHandler("/root/bluesales-cdek-transfering-integration/log.log", maxBytes=64*1024, backupCount=3, encoding='utf-8')
 formatter = logging.Formatter('%(message)s')
 file_handler.setFormatter(formatter)
 file_handler.setLevel(logging.INFO)
 
-full_file_handler = RotatingFileHandler("/home/admin/update-statuses-by-transfering/full_log.log", maxBytes=256*1024, backupCount=3, encoding='utf-8')
+full_file_handler = RotatingFileHandler("/root/bluesales-cdek-transfering-integration/full_log.log", maxBytes=256*1024, backupCount=3, encoding='utf-8')
 full_file_handler.setFormatter(formatter)
 full_file_handler.setLevel(logging.DEBUG)
 
@@ -83,7 +82,7 @@ def main(*args, **kwargs):
 
     for _ in range(3):
         try:
-            bluesales_orders = BLUESALES.orders.get_all()
+            bluesales_orders = BLUESALES.orders.get_all(date_from=datetime.today() - timedelta(days=60))
             break
         except BlueSalesError as e:
             print(e, "sleep 30 seconds...")
@@ -115,7 +114,6 @@ def main(*args, **kwargs):
         try:
             if order.status_name in ["Разбор", "Правки заказа"]:
                 continue
-
             cdek_status = CDEK.get_order_info(order.tracking_number)["entity"]["statuses"][0]["code"]
 
             # logger.debug(str(order.id) + " " + cdek_status + " -> " + INVERTED_STATUSES[get_crm_status_by_cdek(order.status_name, cdek_status)])
