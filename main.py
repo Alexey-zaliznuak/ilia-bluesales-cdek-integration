@@ -23,17 +23,17 @@ from external.bluesales.ordersapi import Order
 logger = logging.getLogger("root")
 logger.setLevel(logging.INFO)
 
-# file_handler = RotatingFileHandler("/root/bluesales-cdek-transfering-integration/log.log", maxBytes=64*1024, backupCount=3, encoding='utf-8')
-# formatter = logging.Formatter('%(message)s')
-# file_handler.setFormatter(formatter)
-# file_handler.setLevel(logging.INFO)
+file_handler = RotatingFileHandler("/root/bluesales-cdek-transfering-integration/log.log", maxBytes=64*1024, backupCount=3, encoding='utf-8')
+formatter = logging.Formatter('%(message)s')
+file_handler.setFormatter(formatter)
+file_handler.setLevel(logging.INFO)
 
-# full_file_handler = RotatingFileHandler("/root/bluesales-cdek-transfering-integration/full_log.log", maxBytes=256*1024, backupCount=3, encoding='utf-8')
-# full_file_handler.setFormatter(formatter)
-# full_file_handler.setLevel(logging.DEBUG)
+full_file_handler = RotatingFileHandler("/root/bluesales-cdek-transfering-integration/full_log.log", maxBytes=256*1024, backupCount=3, encoding='utf-8')
+full_file_handler.setFormatter(formatter)
+full_file_handler.setLevel(logging.DEBUG)
 
-# logger.addHandler(file_handler)
-# logger.addHandler(full_file_handler)
+logger.addHandler(file_handler)
+logger.addHandler(full_file_handler)
 
 stream_handler = StreamHandler()
 stream_formatter = logging.Formatter("%(message)s")
