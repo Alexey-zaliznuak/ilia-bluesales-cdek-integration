@@ -155,13 +155,11 @@ class OrdersAPI:
 
             formatted_date = today.strftime("%Y-%m-%d")
 
-            if crm_status in Settings.STATUS_TO_DATE_FIELD:
-                orders_data.append({
-                    "customFieldValue": {
-                        "fieldId": Settings.STATUS_TO_DATE_FIELD[crm_status],
-                        "value": formatted_date
-                    }
-                })
+            if str(crm_status) in Settings.STATUS_TO_DATE_FIELD:
+                orders_data["customFieldValue"] = {
+                    "fieldId": Settings.STATUS_TO_DATE_FIELD[str(crm_status)],
+                    "value": formatted_date
+                }
 
             try:
                 response = self.request_api.send(
