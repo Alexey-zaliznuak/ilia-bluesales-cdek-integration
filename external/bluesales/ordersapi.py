@@ -128,25 +128,24 @@ class OrdersAPI:
     ):
         grouped_data = {}
 
-        for order_id, status, customer_id in data:
+        for order_id, status in data:
             if status not in grouped_data:
-                grouped_data[status] = {"orders": [], "customers": []}
-            grouped_data[status]["orders"].append(order_id)
-            grouped_data[status]["customers"].append(customer_id)
+                grouped_data[status] = []
+            grouped_data[status].append(order_id)
 
         for crm_status, ids in grouped_data.items():
             crm_status = int(crm_status)
 
-            if not ids["orders"]:
+            if not ids:
                 continue
 
             logger.info(f"Обновление {len(ids)} заказов до статуса '{crm_status}'.")
 
-            for id in ids["orders"]:
+            for id in ids:
                 logger.info(f"Обновление заказа {id} до статуса {crm_status} ({Settings.INVERTED_STATUSES[str(crm_status)]}), https://bluesales.ru/app/Customers/OrderView.aspx?id={id}")
 
             orders_data = {
-                "ids": ids["orders"],
+                "ids": ids,
                 "orderStatus": {
                     "id": crm_status
                 },
@@ -167,7 +166,7 @@ class OrdersAPI:
             try:
                 response = self.request_api.send(
                     OrdersMethods.update_many,
-                    data=data
+                    data=orders_data
                 )
 
                 if isinstance(response, str):

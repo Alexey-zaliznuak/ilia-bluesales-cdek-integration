@@ -126,7 +126,7 @@ def main(*args, **kwargs):
                 cdek_status != 'CREATED' and
                 Settings.STATUSES[order.status_name] != get_crm_status_by_cdek(order.status_name, cdek_status)
             ):
-                update_orders.append([order.id, get_crm_status_by_cdek(order.status_name, cdek_status), order.customer_id])
+                update_orders.append([order.id, get_crm_status_by_cdek(order.status_name, cdek_status)])
 
                 # if get_crm_status_by_cdek(order.status_name, cdek_status) == Settings.STATUSES["Ожидает в ПВЗ"]:
                 #     is_postomat = cdek_status == "POSTOMAT_POSTED"
