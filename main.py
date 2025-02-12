@@ -187,7 +187,7 @@ def main(*args, **kwargs):
 
     BLUESALES.orders.set_many_statuses(update_orders)
 
-    notify_that_orders_in_pvz(orders_notify_that_order_in_pvz)
+    # notify_that_orders_in_pvz(orders_notify_that_order_in_pvz)
     # notify_that_orders_picked(orders_notify_that_order_picked)
     # notify_that_orders_returned(orders_notify_that_order_returned)
 
