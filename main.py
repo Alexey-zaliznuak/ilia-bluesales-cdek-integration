@@ -1,9 +1,7 @@
 # !/root/bluesales-cdek-transfering-integration/venv/bin/python
-import json
 import os
-import vk_api
 
-from typing import List, Tuple
+from typing import List
 
 from datetime import datetime, timedelta
 from time import sleep
@@ -42,34 +40,84 @@ stream_handler.setLevel(logging.INFO)
 logger.addHandler(stream_handler)
 
 
-# def notify_that_orders_in_pvz(orders: List[Tuple[Order, bool]]):
-#     # orders: List[Order, is_postomat: bool]
-#     if not orders:
-#         return
+def notify_that_orders_in_pvz(orders: List[Order]):
+    if not orders:
+        return
 
-#     logger.info("\n=== Рассылка уведомления о доставке в пунты выдачи / постаматы ===")
+    logger.info("\n=== Рассылка уведомления о доставке в пунты выдачи / постаматы ===")
 
-#     for order in orders:
-#         order, is_postomat = order
+    for order in orders:
+        order_contact_data = (
+            f"Айди клиента в вк: {order.customer_vk_id}, "
+            f"Айди группы переписки клиента в вк: {order.customer_vk_messages_group_id}, "
+            f"https://bluesales.ru/app/Customers/OrderView.aspx?id={order.id}"
+        )
 
-#         order_contact_data = (
-#             f"Айди клиента в вк: {order.customer_vk_id}, "
-#             f"Айди группы переписки клиента в вк: {order.customer_vk_messages_group_id}, "
-#             f"https://bluesales.ru/app/Customers/OrderView.aspx?id={order.id}"
-#         )
+        if not (order.customer_vk_id and order.customer_vk_messages_group_id):
+            logger.info(f"У клиента не указаны данные в вк для уведомления. {order_contact_data}")
+            continue
 
-#         if not (order.customer_vk_id and order.customer_vk_messages_group_id):
-#             logger.info(f"У клиента не указаны данные в вк для уведомления. {order_contact_data}")
-#             continue
+        vk = Settings.VK_CLIENTS_BY_GROUP_ID[order.customer_vk_messages_group_id]
+        result = vk.messages.send(
+            user_id=order.customer_vk_id,
+            # message=Settings.text_for_postomat if is_postomat else Settings.text_for_pvz,
+            message=Settings.text_for_pvz,
+            random_id=int.from_bytes(os.getrandom(4), byteorder="big")
+        )
+        logger.debug("Результат отправки: " + str(result))
+        logger.info(f"Отправка уведомления что заказ в пвз/постомате. {order_contact_data}")
 
-#         vk = Settings.VK_CLIENTS_BY_GROUP_ID[order.customer_vk_messages_group_id]
-#         result = vk.messages.send(
-#             user_id=order.customer_vk_id,
-#             message=Settings.text_for_postomat if is_postomat else Settings.text_for_pvz,
-#             random_id=int.from_bytes(os.getrandom(4), byteorder="big")
-#         )
-#         logger.debug("Результат отправки: " + str(result))
-#         logger.info(f"Отправка уведомления что заказ в {'постамат' if is_postomat else 'пункт выдачи'}. {order_contact_data}")
+def notify_that_orders_picked(orders: List[Order]):
+    if not orders:
+        return
+
+    logger.info("\n=== Рассылка уведомления о получении заказа ===")
+
+    for order in orders:
+        order_contact_data = (
+            f"Айди клиента в вк: {order.customer_vk_id}, "
+            f"Айди группы переписки клиента в вк: {order.customer_vk_messages_group_id}, "
+            f"https://bluesales.ru/app/Customers/OrderView.aspx?id={order.id}"
+        )
+
+        if not (order.customer_vk_id and order.customer_vk_messages_group_id):
+            logger.info(f"У клиента не указаны данные в вк для уведомления. {order_contact_data}")
+            continue
+
+        vk = Settings.VK_CLIENTS_BY_GROUP_ID[order.customer_vk_messages_group_id]
+        result = vk.messages.send(
+            user_id=order.customer_vk_id,
+            message=Settings.text_for_picked,
+            random_id=int.from_bytes(os.getrandom(4), byteorder="big")
+        )
+        logger.debug("Результат отправки: " + str(result))
+        logger.info(f"Отправка уведомления что заказ получен. {order_contact_data}")
+
+def notify_that_orders_returned(orders: List[Order]):
+    if not orders:
+        return
+
+    logger.info("\n=== Рассылка уведомления о возврате заказа ===")
+
+    for order in orders:
+        order_contact_data = (
+            f"Айди клиента в вк: {order.customer_vk_id}, "
+            f"Айди группы переписки клиента в вк: {order.customer_vk_messages_group_id}, "
+            f"https://bluesales.ru/app/Customers/OrderView.aspx?id={order.id}"
+        )
+
+        if not (order.customer_vk_id and order.customer_vk_messages_group_id):
+            logger.info(f"У клиента не указаны данные в вк для уведомления. {order_contact_data}")
+            continue
+
+        vk = Settings.VK_CLIENTS_BY_GROUP_ID[order.customer_vk_messages_group_id]
+        result = vk.messages.send(
+            user_id=order.customer_vk_id,
+            message=Settings.text_for_returned,
+            random_id=int.from_bytes(os.getrandom(4), byteorder="big")
+        )
+        logger.debug("Результат отправки: " + str(result))
+        logger.info(f"Отправка уведомления что заказ возвращается. {order_contact_data}")
 
 
 def get_crm_status_by_cdek(current_crm_status: str, cdek_status_name: str):
@@ -108,8 +156,10 @@ def main(*args, **kwargs):
     print("Активных", len(bluesales_orders), "сделок")
 
     update_orders = []
-    orders_notify_that_order_in_pvz = []  # заказы, заказчикам которых нужно сделать уведу что из заказ в ПВЗ
 
+    orders_notify_that_order_in_pvz = []  # заказы, заказчикам которых нужно сделать уведу что из заказ в ПВЗ
+    orders_notify_that_order_picked = []  # заказы, заказчикам которых нужно сделать уведу что они забрпли заказ
+    orders_notify_that_order_returned = []  # заказы, заказчикам которых нужно сделать уведу что у них возврат
 
     for order in bluesales_orders:
         try:
@@ -117,27 +167,29 @@ def main(*args, **kwargs):
                 continue
             cdek_status = CDEK.get_order_info(order.tracking_number)["entity"]["statuses"][0]["code"]
 
-            # logger.debug(str(order.id) + " " + cdek_status + " -> " + INVERTED_STATUSES[get_crm_status_by_cdek(order.status_name, cdek_status)])
-
-            # input("TEST" + str(get_crm_status_by_cdek(order.status_name, cdek_status)))
-            # exit()
-
             if (
                 cdek_status != 'CREATED' and
-                Settings.STATUSES[order.status_name] != get_crm_status_by_cdek(order.status_name, cdek_status)
+                Settings.STATUSES[order.status_name] != get_crm_status_by_cdek(order.status_name, cdek_status)  # статус поменялся
             ):
                 update_orders.append([order.id, get_crm_status_by_cdek(order.status_name, cdek_status)])
 
-                # if get_crm_status_by_cdek(order.status_name, cdek_status) == Settings.STATUSES["Ожидает в ПВЗ"]:
-                #     is_postomat = cdek_status == "POSTOMAT_POSTED"
-                #     orders_notify_that_order_in_pvz.append((order, is_postomat))
+                if get_crm_status_by_cdek(order.status_name, cdek_status) == Settings.STATUSES["Ожидает в ПВЗ"]:
+                    orders_notify_that_order_in_pvz.append(order)
+
+                if get_crm_status_by_cdek(order.status_name, cdek_status) == Settings.STATUSES["Вручен"]:
+                    orders_notify_that_order_picked.append(order)
+
+                if get_crm_status_by_cdek(order.status_name, cdek_status) == Settings.STATUSES["Возврат"]:
+                    orders_notify_that_order_returned.append(order)
 
         except HTTPError as e:
             logger.error(e)
 
     BLUESALES.orders.set_many_statuses(update_orders)
 
-    # notify_that_orders_in_pvz(orders_notify_that_order_in_pvz)
+    notify_that_orders_in_pvz(orders_notify_that_order_in_pvz)
+    # notify_that_orders_picked(orders_notify_that_order_picked)
+    # notify_that_orders_returned(orders_notify_that_order_returned)
 
 if __name__ == "__main__":
     logger.info(
@@ -149,11 +201,3 @@ if __name__ == "__main__":
         logger.error(e)
     finally:
         logger.info("\n"*2)
-
-
-# orders = BLUESALES.orders.get_all(ids=[10746779])
-
-# with open("./temp_order.json", 'w', encoding='utf-8') as f:
-#     json.dump(orders[0].order, f, ensure_ascii=False, indent=4)
-
-# exit()
